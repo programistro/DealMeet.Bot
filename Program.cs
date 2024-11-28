@@ -10,12 +10,13 @@ namespace DealMeet.Bot;
 
 class Program
 {
-    static void Main()
+    static async Task Main()
     {
         TelegramBotClient botClient = new("7614679805:AAHMVbGlbYSOkPj_Kh75nrnvkWO9IGBjU_g");
         Console.WriteLine("Starting bot");
         botClient.StartReceiving(Start, Error);
         Console.ReadLine();
+        await Task.Delay(-1);
     }
 
     private static async Task Start(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
@@ -71,7 +72,7 @@ class Program
                 var content = new StringContent(jsonContent, System.Text.Encoding.UTF8, "application/json");
                 
                 await client.PostAsync(
-                    $"https://90.156.254.193:8080/auth/register-tg-user",
+                    $"http://90.156.254.193:8080/auth/register-tg-user",
                     content, cancellationToken);
             }
             
@@ -99,7 +100,7 @@ class Program
                 var content = new StringContent(jsonContent, System.Text.Encoding.UTF8, "application/json");
                 
                 await client.PostAsync(
-                    $"https://90.156.254.193:8080/auth/login-tg-user",
+                    $"http://90.156.254.193:8080/auth/login-tg-user",
                     content, cancellationToken);
             }
             
